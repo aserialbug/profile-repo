@@ -7,7 +7,7 @@ create table if not exists public.profiles
     mfa_id     text      not null,
     created_at timestamp not null,
     updated_at timestamp not null,
-    version    integer   not null
+    version    integer   not null default 0
 );
 
 alter table public.profiles

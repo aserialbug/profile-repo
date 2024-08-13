@@ -10,7 +10,7 @@ class Profile(
     val mfaId: MfaId,
     val createdAt: Instant,
     var updatedAt: Instant,
-    var version: Long
+    version: Long
 ) {
     var phone: Phone = phone
         set(value) {
@@ -31,6 +31,17 @@ class Profile(
             version++;
             updatedAt = Instant.now()
         }
+
+    var version: Long = version
+        private set(_)
+        {
+            if(!dirty) {
+                field++
+                dirty = true
+            }
+        }
+
+    private var dirty: Boolean = false
 
     constructor(
         id: ProfileId,
