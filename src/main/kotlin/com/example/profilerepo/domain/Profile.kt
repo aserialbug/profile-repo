@@ -41,7 +41,8 @@ class Profile(
             }
         }
 
-    private var dirty: Boolean = false
+    var dirty: Boolean = false
+        private set;
 
     constructor(
         id: ProfileId,

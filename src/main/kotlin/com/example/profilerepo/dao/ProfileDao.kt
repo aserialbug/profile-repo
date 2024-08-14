@@ -24,7 +24,7 @@ class ProfileDao(val db: JdbcTemplate) {
     }
 
     fun saveProfile(profile: Profile) {
-        db.update(
+        val rowAffected = db.update(
             INSERT_OR_UPDATE_PROFILE_SQL,
             profile.id.asUuid(),
             profile.innHash.toString(),
@@ -37,6 +37,14 @@ class ProfileDao(val db: JdbcTemplate) {
             profile.email.toString(),
             Timestamp.from(profile.updatedAt),
             profile.version - 1)
+
+        // Профиль был обновлен, но не записался в базу
+        // такое бывает конда конкурентный процесс уже обновил
+        // этот профиль и увеличил его версию
+        // Нужно вернуть временную ошибку, которая поправиться
+        // с помощью повторной попытки
+        if(profile.dirty && rowAffected == 0)
+            throw IllegalStateException("Profile has not been updated, please retry")
     }
 
     fun getAllProfiles(): Collection<ProfileDto> = db.query(SELECT_ALL_PROFILES_SQL) { response, _ ->
