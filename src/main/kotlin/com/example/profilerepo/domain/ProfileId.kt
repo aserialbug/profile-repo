@@ -24,5 +24,4 @@ value class ProfileId(private val id: UUID) {
 
     fun asUuid() = id;
     override fun toString(): String = id.toString();
-    fun new() = ProfileId(UUID.randomUUID())
 }
