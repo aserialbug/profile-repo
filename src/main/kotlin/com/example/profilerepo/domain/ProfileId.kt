@@ -18,6 +18,8 @@ value class ProfileId(private val id: UUID) {
 
             return ProfileId(UUID.fromString(value))
         }
+
+        fun new(): ProfileId = ProfileId(UUID.randomUUID())
     }
 
     fun asUuid() = id;

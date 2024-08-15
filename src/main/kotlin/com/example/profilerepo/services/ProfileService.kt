@@ -25,7 +25,7 @@ class ProfileService(
         var profile = profileDao.findProfile(innHash)
 
         if(profile == null) {
-            val profileId = ProfileId(attributes.id)
+            val profileId = ProfileId.new()
             val mfa = MfaId(attributes.mfaId)
             profile = Profile(profileId, innHash, phone, email, mfa);
         }
