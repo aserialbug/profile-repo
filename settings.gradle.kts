@@ -3,6 +3,5 @@ plugins {
 }
 rootProject.name = "profile-repo"
 include("domain")
-include("service")
 include("application")
 include("infrastructure")

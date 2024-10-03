@@ -4,7 +4,6 @@ import profilerepo.dto.CreateProfileAttributes
 import profilerepo.dto.ProfileDto
 import profilerepo.interfaces.IProfileDao
 import domain.*
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.stereotype.Service
 
 @Service
